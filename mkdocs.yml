@@ -1,0 +1,85 @@
+site_name: Python Project
+
+docs_dir: docs
+
+theme:
+  name: "material"
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - toc.follow
+  palette:
+    primary: "light blue"
+    accent: "light blue"
+
+extra_css:
+  - "stylesheets/extra.css"
+  - "stylesheets/theme_dark.css"
+extra_javascript:
+  - "javascript/images_dark.js"
+
+plugins:
+  - search:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [ src ]
+  - render_swagger:
+      allow_arbitrary_locations : true
+  - build_plantuml:
+      render: 'server' # or "local" for local rendering
+      bin_path: '/usr/local/bin/plantuml' # ignored when render: server
+      server: 'http://www.plantuml.com/plantuml' # official plantuml server
+      disable_ssl_certificate_validation: true # for self-signed and invalid certs
+      output_format: 'svg' # or "png"
+      allow_multiple_roots: false # in case your codebase contains more locations for diagrams (all ending in diagram_root)
+      diagram_root: 'docs/diagrams' # should reside under docs_dir
+      output_folder: 'out'
+      input_folder: 'src'
+      input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
+      theme_enabled: true
+      theme_folder: "include/themes"
+      theme_light: "light.puml"
+      theme_dark: "dark.puml"
+nav: 
+  - Home: index.md
+    - References: references.md
+  - Tutorials:
+    - Tutorials: tutorials.md
+  - Explanation:
+    - Explanation: explanation.md
+      - "Continuous integration and deployment": continuous-integration-and-deployment.md
+      - "Versioning": versioning.md
+      - "Documentation":documentation.md
+  - How-To Guides:
+    - How-To Guides: how-to-guides.md
+  - Reference:
+    - "Project Structure": project-structure.md
+    - Reference: reference.md
+    - API: api-documentation.md
+    - "Branching strategy": branching-strategy.md
+    - Workflow: workflow.md
+    - Commands: commands.md
+    - ToDo: todo.md
+
+# Extensions
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+
+
+repo_url: https://github.com/p-gnd/template-python-project
+
+# to navigate with `/site` content correctly
+use_directory_urls: false
+
+

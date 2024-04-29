@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  app:
+    container_name: python-project
+    image: ghcr.io/p-gnd/python-project:latest
+    ports:
+     - 10000:80

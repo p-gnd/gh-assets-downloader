@@ -1,0 +1,30 @@
+@startuml
+!theme blueprint
+start
+  :commit to Main;
+  -> push event;
+  :Orchestrator;
+  -> calling;
+fork
+  :Run Testing pipeline;
+  -> success;
+fork again
+  :Run Linting pipeline;
+  -> success;
+fork again
+  :Run Build pipeline;
+  -> success;
+end fork {and}
+  :Run Release pipeline;
+  -> Version bump detected;
+  :Commit to 'main';
+  -> Version bump;
+  :Release;
+  -> release event;
+fork
+  :Run Documentation pipeline;
+fork again
+  :Run Build & Push pipeline;
+end fork
+stop
+@enduml
